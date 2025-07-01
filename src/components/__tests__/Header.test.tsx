@@ -1,4 +1,13 @@
-import { describe, it, expect, vi, beforeEach, beforeAll, afterEach, afterAll } from 'vitest';
+import {
+  describe,
+  it,
+  expect,
+  vi,
+  beforeEach,
+  beforeAll,
+  afterEach,
+  afterAll,
+} from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Header } from '../Header';
 import { Toast } from '../Toast';
@@ -40,7 +49,7 @@ describe('Header Component', () => {
 
   it('should show loading state when video is processing', () => {
     useVideoStore.setState({ isProcessing: true });
-    
+
     render(
       <TestWrapper>
         <Header />

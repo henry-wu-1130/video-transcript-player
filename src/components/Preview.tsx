@@ -5,16 +5,16 @@ export function Preview() {
   const { videoUrl, isProcessing } = useVideoStore();
 
   return (
-    <div className="h-full">
-      <div className="border-b border-gray-200 px-4 py-3">
-        <h2 className="text-xl text-gray-800 font-medium">Preview</h2>
+    <div className="h-full bg-gray-900 flex flex-col">
+      <div className="bg-gray-800 border-b border-gray-700 px-4 py-3">
+        <h2 className="text-xl text-white font-medium">Preview</h2>
       </div>
-      <div className="h-[calc(100%-3.5rem)]">
+      <div className="flex-1">
         {isProcessing ? (
           <Loading />
         ) : !videoUrl ? (
-          <div className="h-full flex items-center justify-center bg-gray-100">
-            <div className="text-gray-500 text-center">
+          <div className="h-full flex items-center justify-center">
+            <div className="text-center text-gray-300">
               <p>Upload a video to preview</p>
             </div>
           </div>

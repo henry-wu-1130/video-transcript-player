@@ -82,7 +82,7 @@ export function Header() {
 
   return (
     <div className="max-w-7xl h-full mx-auto px-4 flex justify-between items-center">
-      <h1 className="text-white text-xl font-medium">
+      <h1 className="text-gray-800 text-xl font-medium">
         Video Transcript Player
       </h1>
       <div className="flex items-center gap-4">

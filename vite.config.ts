@@ -24,6 +24,35 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/setupTests.ts'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text'],
+      reportsDirectory: './coverage',
+      all: false,
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        '**/*.{test,spec}.{ts,tsx}',
+        '**/node_modules/**',
+        '**/dist/**',
+        '**/coverage/**',
+        '**/public/**',
+        '**/mocks/**',
+        '**/tests/**',
+        '**/src/App.tsx',
+        '**/src/main.tsx',
+        '**/src/setupTests.ts',
+        '**/src/vite-env.d.ts',
+        '**/src/services/**',
+        '**/*.d.ts'
+      ],
+      thresholds: {
+        branches: 70,
+        functions: 70,
+        lines: 70,
+        statements: 70
+      },
+      reportOnFailure: false
+    },
     // 排除不需要測試的文件
     exclude: [
       '**/node_modules/**',

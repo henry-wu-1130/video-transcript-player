@@ -1,14 +1,26 @@
-import { useRef, useEffect, useState } from 'react';
-import { useVideoStore } from '../stores/videoStore';
+import { useEffect } from 'react';
+import type { RefObject } from 'react';
 import { Timeline } from './Timeline';
 import { VideoControls } from './VideoControls';
 
-export function VideoPlayer() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [duration, setDuration] = useState<number>(0);
-  const { videoUrl, currentTime, setCurrentTime } = useVideoStore();
+interface VideoPlayerProps {
+  videoRef: RefObject<HTMLVideoElement>;
+  videoUrl: string;
+  currentTime: number;
+  duration: number;
+  onTimeUpdate: () => void;
+  onDurationChange: () => void;
+}
 
-  // Sync video current time with store
+export function VideoPlayer({
+  videoRef,
+  videoUrl,
+  currentTime,
+  duration,
+  onTimeUpdate,
+  onDurationChange,
+}: VideoPlayerProps) {
+  // Sync video current time with prop
   useEffect(() => {
     if (
       videoRef.current &&
@@ -16,14 +28,7 @@ export function VideoPlayer() {
     ) {
       videoRef.current.currentTime = currentTime;
     }
-  }, [currentTime]);
-
-  // Update store current time when video is playing
-  const handleTimeUpdate = () => {
-    if (videoRef.current) {
-      setCurrentTime(videoRef.current.currentTime);
-    }
-  };
+  }, [currentTime, videoRef]);
 
   return (
     <div className="h-full bg-gray-900 flex flex-col">
@@ -43,12 +48,8 @@ export function VideoPlayer() {
               ref={videoRef}
               src={videoUrl}
               className="max-h-full max-w-full"
-              onTimeUpdate={handleTimeUpdate}
-              onLoadedMetadata={() => {
-                if (videoRef.current) {
-                  setDuration(videoRef.current.duration);
-                }
-              }}
+              onTimeUpdate={onTimeUpdate}
+              onLoadedMetadata={onDurationChange}
             />
           </div>
           <div className="flex flex-col gap-2">

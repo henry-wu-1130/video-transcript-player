@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
-import { Transcript } from '../Transcript';
+import { TranscriptContainer } from '../../containers/TranscriptContainer';
 import { useVideoStore } from '../../stores/videoStore';
 
 // Mock the video store
@@ -8,7 +8,7 @@ vi.mock('../../stores/videoStore', () => ({
   useVideoStore: vi.fn(),
 }));
 
-describe('Transcript Component', () => {
+describe('TranscriptContainer', () => {
   const mockSections = [
     {
       id: 'section1',
@@ -47,7 +47,7 @@ describe('Transcript Component', () => {
   });
 
   it('renders all sections and items', () => {
-    render(<Transcript />);
+    render(<TranscriptContainer />);
 
     // Check section title
     expect(screen.getByText('測試段落 1')).toBeInTheDocument();
@@ -58,7 +58,7 @@ describe('Transcript Component', () => {
   });
 
   it('handles time click correctly', () => {
-    render(<Transcript />);
+    render(<TranscriptContainer />);
 
     // Click on the first timestamp
     const timeButton = screen.getByText('00:00');
@@ -78,7 +78,7 @@ describe('Transcript Component', () => {
       toggleSelection: mockToggleSelection,
     });
 
-    const { container, rerender } = render(<Transcript />);
+    const { container, rerender } = render(<TranscriptContainer />);
 
     // Click on the second section's second timestamp
     const timeButton = screen.getByText('00:30');
@@ -96,7 +96,7 @@ describe('Transcript Component', () => {
     });
 
     // Re-render the same component instance
-    rerender(<Transcript />);
+    rerender(<TranscriptContainer />);
 
     // Query items by their unique combination of section and index
     const section2Items = container.querySelectorAll(
@@ -107,11 +107,13 @@ describe('Transcript Component', () => {
 
     expect(currentItem).toHaveClass('border-2');
     expect(currentItem).toHaveClass('border-amber-400');
+    expect(currentItem).toHaveAttribute('data-current', 'true');
     expect(notCurrentItem).not.toHaveClass('border-amber-400');
+    expect(notCurrentItem).toHaveAttribute('data-current', 'false');
   });
 
   it('handles item selection correctly', () => {
-    render(<Transcript />);
+    render(<TranscriptContainer />);
 
     // Click on the first item
     const item = screen.getByText('測試文字 1');
@@ -121,7 +123,7 @@ describe('Transcript Component', () => {
   });
 
   it('shows current playing item with golden border', () => {
-    render(<Transcript />);
+    render(<TranscriptContainer />);
 
     // The first item should be highlighted as current (time: 5 is between 0 and 10)
     const currentItem = screen.getByText('測試文字 1').parentElement;
@@ -130,10 +132,70 @@ describe('Transcript Component', () => {
   });
 
   it('shows selected items with blue background', () => {
-    render(<Transcript />);
+    render(<TranscriptContainer />);
 
     // The second item is marked as selected in mock data
     const selectedItem = screen.getByText('測試文字 2').parentElement;
     expect(selectedItem).toHaveClass('bg-blue-500');
+  });
+
+  it('auto-scrolls to current item when it changes', () => {
+    // Mock scrollIntoView
+    const mockScrollIntoView = vi.fn();
+    Element.prototype.scrollIntoView = mockScrollIntoView;
+
+    // Mock getBoundingClientRect for container and current item
+    const mockContainerRect = {
+      top: 0,
+      bottom: 500,
+      height: 500,
+    };
+    const mockItemRect = {
+      top: 600,
+      bottom: 640,
+      height: 40,
+    };
+
+    // Mock element properties
+    Element.prototype.getBoundingClientRect = vi
+      .fn()
+      .mockImplementation(function (this: Element) {
+        if (this.hasAttribute('data-current')) {
+          return mockItemRect;
+        }
+        return mockContainerRect;
+      });
+    Object.defineProperty(Element.prototype, 'clientHeight', {
+      get: () => 500,
+    });
+    Object.defineProperty(Element.prototype, 'scrollTop', {
+      get: () => 0,
+    });
+
+    // Set initial current time
+    (useVideoStore as any).mockReturnValue({
+      sections: mockSections,
+      currentTime: 0,
+      setCurrentTime: mockSetCurrentTime,
+      toggleSelection: mockToggleSelection,
+    });
+
+    const { rerender } = render(<TranscriptContainer />);
+
+    // Update current time to trigger auto-scroll
+    (useVideoStore as any).mockReturnValue({
+      sections: mockSections,
+      currentTime: 30,
+      setCurrentTime: mockSetCurrentTime,
+      toggleSelection: mockToggleSelection,
+    });
+
+    rerender(<TranscriptContainer />);
+
+    // Verify that scrollIntoView was called with correct options
+    expect(mockScrollIntoView).toHaveBeenCalledWith({
+      behavior: 'smooth',
+      block: 'center',
+    });
   });
 });

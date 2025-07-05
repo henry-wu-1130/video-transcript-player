@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useVideoStore } from '../stores/videoStore';
+import { PrevSectionIcon, PlayIcon, PauseIcon, NextSectionIcon } from './Icons';
 
 interface VideoControlsProps {
   videoRef: React.RefObject<HTMLVideoElement>;
@@ -75,20 +76,7 @@ export function VideoControls({ videoRef, duration }: VideoControlsProps) {
           disabled={findCurrentSectionIndex() <= 0}
           aria-label="Previous section"
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-            />
-          </svg>
+          <PrevSectionIcon size={24} color="currentColor" aria-hidden={true} />
         </button>
 
         {/* Play/Pause */}
@@ -97,24 +85,11 @@ export function VideoControls({ videoRef, duration }: VideoControlsProps) {
           onClick={handlePlayPause}
           aria-label={videoRef.current?.paused ? 'Play' : 'Pause'}
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d={
-                videoRef.current?.paused
-                  ? 'M8 5v14l11-7-11-7z'
-                  : 'M6 4h4v16H6zm8 0h4v16h-4z'
-              }
-            />
-          </svg>
+          {videoRef.current?.paused ? (
+            <PlayIcon size={24} color="currentColor" aria-hidden={true} />
+          ) : (
+            <PauseIcon size={24} color="currentColor" aria-hidden={true} />
+          )}
         </button>
 
         {/* Next Section */}
@@ -124,20 +99,7 @@ export function VideoControls({ videoRef, duration }: VideoControlsProps) {
           disabled={findCurrentSectionIndex() >= sections.length - 1}
           aria-label="Next section"
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M13 5l7 7-7 7M5 5l7 7-7 7"
-            />
-          </svg>
+          <NextSectionIcon size={24} color="currentColor" aria-hidden={true} />
         </button>
       </div>
 

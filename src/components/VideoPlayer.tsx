@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import type { RefObject } from 'react';
 import { Timeline } from './Timeline';
 import { VideoControls } from './VideoControls';
+import { VideoCaption } from './VideoCaption';
 
 interface VideoPlayerProps {
   videoRef: RefObject<HTMLVideoElement>;
@@ -43,7 +44,7 @@ export function VideoPlayer({
         </div>
       ) : (
         <div className="flex-1 flex flex-col bg-black">
-          <div className="flex-1 flex items-center justify-center">
+          <div className="flex-1 flex items-center justify-center relative">
             <video
               ref={videoRef}
               src={videoUrl}
@@ -51,6 +52,7 @@ export function VideoPlayer({
               onTimeUpdate={onTimeUpdate}
               onLoadedMetadata={onDurationChange}
             />
+            <VideoCaption />
           </div>
           <div className="flex flex-col gap-2">
             {duration > 0 && (

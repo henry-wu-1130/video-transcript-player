@@ -67,11 +67,11 @@ export function VideoControls({ videoRef, duration }: VideoControlsProps) {
   };
 
   return (
-    <div className="flex items-center justify-between px-4 py-2">
+    <div className="flex items-center justify-between px-4 py-2 bg-secondary-800">
       <div className="flex items-center gap-4">
         {/* Previous Section */}
         <button
-          className="text-gray-400 hover:text-white transition-colors"
+          className="text-secondary-400 hover:text-secondary-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={() => navigateToSection('prev')}
           disabled={findCurrentSectionIndex() <= 0}
           aria-label="Previous section"
@@ -81,7 +81,7 @@ export function VideoControls({ videoRef, duration }: VideoControlsProps) {
 
         {/* Play/Pause */}
         <button
-          className="text-gray-400 hover:text-white transition-colors"
+          className="text-secondary-400 hover:text-secondary-200 transition-colors"
           onClick={handlePlayPause}
           aria-label={videoRef.current?.paused ? 'Play' : 'Pause'}
         >
@@ -94,7 +94,7 @@ export function VideoControls({ videoRef, duration }: VideoControlsProps) {
 
         {/* Next Section */}
         <button
-          className="text-gray-400 hover:text-white transition-colors"
+          className="text-secondary-400 hover:text-secondary-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={() => navigateToSection('next')}
           disabled={findCurrentSectionIndex() >= sections.length - 1}
           aria-label="Next section"
@@ -104,7 +104,7 @@ export function VideoControls({ videoRef, duration }: VideoControlsProps) {
       </div>
 
       {/* Time Display */}
-      <div className="text-gray-400 font-mono">
+      <div className="text-secondary-400 font-mono">
         {formatTime(currentTime)} / {formatTime(duration)}
       </div>
     </div>

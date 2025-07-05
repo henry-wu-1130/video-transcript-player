@@ -15,3 +15,5 @@
 - [ ] 支援 keyboard
 
 - [ ] 跨瀏覽器等測試，請用 cypress
+
+- [ ] ci 掃描 npm 套件安全性

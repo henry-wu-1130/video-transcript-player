@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { useVideoStore } from '../stores/videoStore';
-import { useToastStore } from '../stores/toastStore';
+import { showToast } from './Toast';
 
 interface ConfirmDialogProps {
   isOpen: boolean;
@@ -12,20 +12,20 @@ function ConfirmDialog({ isOpen, onConfirm, onCancel }: ConfirmDialogProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 max-w-sm w-full mx-4">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">
+    <div className="fixed inset-0 bg-secondary-900/50 flex items-center justify-center z-50 animate-fade-in">
+      <div className="bg-secondary-50 rounded-lg p-6 max-w-sm w-full mx-4 shadow-lg animate-scale">
+        <h3 className="text-lg font-medium text-secondary-900 mb-4">
           Are you sure you want to remove the video?
         </h3>
         <div className="flex justify-end gap-4">
           <button
-            className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+            className="px-4 py-2 text-sm font-medium text-secondary-700 hover:bg-secondary-100 rounded-md transition-colors"
             onClick={onCancel}
           >
             Cancel
           </button>
           <button
-            className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md transition-colors"
+            className="px-4 py-2 text-sm font-medium text-secondary-50 bg-error-600 hover:bg-error-700 rounded-md transition-colors"
             onClick={onConfirm}
           >
             移除
@@ -38,7 +38,7 @@ function ConfirmDialog({ isOpen, onConfirm, onCancel }: ConfirmDialogProps) {
 
 export function Header() {
   const { uploadVideo, videoUrl, clearVideo, isProcessing } = useVideoStore();
-  const { showToast } = useToastStore();
+  // 使用新的 showToast 函數
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
@@ -82,12 +82,12 @@ export function Header() {
 
   return (
     <div className="max-w-7xl h-full mx-auto px-4 flex justify-between items-center">
-      <h1 className="text-gray-800 text-xl font-medium">
+      <h1 className="text-secondary-900 text-xl font-medium">
         Video Transcript Player
       </h1>
       <div className="flex items-center gap-4">
         <button
-          className={`px-4 py-2 text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 rounded transition-colors ${
+          className={`px-4 py-2 text-sm font-medium text-secondary-50 bg-primary-600 hover:bg-primary-700 rounded transition-colors ${
             isProcessing ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           onClick={handleClick}
@@ -105,7 +105,7 @@ export function Header() {
         />
         {videoUrl && (
           <button
-            className="px-4 py-2 text-sm font-medium text-white bg-red-500 hover:bg-red-600 rounded transition-colors"
+            className="px-4 py-2 text-sm font-medium text-secondary-50 bg-error-600 hover:bg-error-700 rounded transition-colors"
             onClick={handleRemoveVideo}
           >
             Remove Video

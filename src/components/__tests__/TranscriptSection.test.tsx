@@ -55,9 +55,9 @@ describe('TranscriptSection', () => {
     const items = screen.getAllByTestId('transcript-item');
 
     // Check that only the current item has the golden border
-    expect(items[1]).toHaveClass('border-amber-400');
-    expect(items[0]).not.toHaveClass('border-amber-400');
-    expect(items[2]).not.toHaveClass('border-amber-400');
+    expect(items[1]).toHaveClass('border-warning-400');
+    expect(items[0]).not.toHaveClass('border-warning-400');
+    expect(items[2]).not.toHaveClass('border-warning-400');
   });
 
   it('shows highlighted items with blue background', () => {
@@ -74,7 +74,7 @@ describe('TranscriptSection', () => {
     const items = screen.getAllByTestId('transcript-item');
 
     // Check that highlighted item has blue background
-    expect(items[1]).toHaveClass('bg-blue-500'); // Second item is highlighted
+    expect(items[1]).toHaveClass('bg-primary-600'); // Second item is highlighted
   });
 
   it('calls onTimeClick when time button is clicked', () => {

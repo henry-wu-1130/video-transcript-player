@@ -106,9 +106,9 @@ describe('TranscriptContainer', () => {
     const notCurrentItem = section2Items[0];
 
     expect(currentItem).toHaveClass('border-2');
-    expect(currentItem).toHaveClass('border-amber-400');
+    expect(currentItem).toHaveClass('border-warning-400');
     expect(currentItem).toHaveAttribute('data-current', 'true');
-    expect(notCurrentItem).not.toHaveClass('border-amber-400');
+    expect(notCurrentItem).not.toHaveClass('border-warning-400');
     expect(notCurrentItem).toHaveAttribute('data-current', 'false');
   });
 
@@ -128,7 +128,7 @@ describe('TranscriptContainer', () => {
     // The first item should be highlighted as current (time: 5 is between 0 and 10)
     const currentItem = screen.getByText('測試文字 1').parentElement;
     expect(currentItem).toHaveClass('border-2');
-    expect(currentItem).toHaveClass('border-amber-400');
+    expect(currentItem).toHaveClass('border-warning-400');
   });
 
   it('shows selected items with blue background', () => {
@@ -136,7 +136,7 @@ describe('TranscriptContainer', () => {
 
     // The second item is marked as selected in mock data
     const selectedItem = screen.getByText('測試文字 2').parentElement;
-    expect(selectedItem).toHaveClass('bg-blue-500');
+    expect(selectedItem).toHaveClass('bg-primary-600');
   });
 
   it('auto-scrolls to current item when it changes', () => {

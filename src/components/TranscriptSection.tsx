@@ -23,7 +23,7 @@ export function TranscriptSection({
 }: TranscriptSectionProps) {
   return (
     <div className="mb-6" data-section-id={section.id}>
-      <h3 className="text-gray-800 text-base font-medium mb-3">
+      <h3 className="text-secondary-900 text-base font-medium mb-3">
         {section.title}
       </h3>
       <div className="flex flex-col gap-1">
@@ -39,16 +39,16 @@ export function TranscriptSection({
               className={`flex gap-3 p-2 rounded transition-colors cursor-pointer border-2
                 ${
                   item.isHighlight
-                    ? 'bg-blue-500 text-white'
-                    : 'hover:bg-gray-100'
+                    ? 'bg-primary-600 text-secondary-50'
+                    : 'hover:bg-secondary-100'
                 }
-                ${isCurrentTime ? 'border-amber-400' : 'border-transparent'}`}
+                ${isCurrentTime ? 'border-warning-400' : 'border-transparent'}`}
               onClick={() => onToggleSelection(index)}
             >
               <button
                 data-testid="timestamp"
                 className={`font-mono text-sm shrink-0 hover:opacity-80 transition-opacity
-                  ${item.isHighlight ? 'text-white' : 'text-blue-500'}`}
+                  ${item.isHighlight ? 'text-secondary-50' : 'text-primary-600'}`}
                 onClick={(e) => {
                   e.stopPropagation();
                   onTimeClick(item.time);
@@ -57,7 +57,7 @@ export function TranscriptSection({
                 {formatTime(item.time)}
               </button>
               <span
-                className={item.isHighlight ? 'text-white' : 'text-gray-700'}
+                className={item.isHighlight ? 'text-secondary-50' : 'text-secondary-700'}
               >
                 {item.text}
               </span>

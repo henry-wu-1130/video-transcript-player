@@ -9,12 +9,19 @@ import {
   afterAll,
 } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+
 import { Header } from '../Header';
-import { Toast } from '../Toast';
+import { Toast, showToast } from '../Toast';
 import { useVideoStore } from '../../stores/videoStore';
-import { useToastStore } from '../../stores/toastStore';
+
 import { http, HttpResponse } from 'msw';
 import { server } from '../../mocks/test';
+
+// Mock showToast
+vi.mock('../Toast', () => ({
+  Toast: () => null,
+  showToast: vi.fn(),
+}));
 
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (
   <>
@@ -35,7 +42,7 @@ describe('Header Component', () => {
 
   beforeEach(() => {
     vi.resetAllMocks();
-    useToastStore.setState({ message: '', isVisible: false });
+
     useVideoStore.setState({
       isProcessing: false,
       selectedVideo: null,
@@ -147,7 +154,7 @@ describe('Header Component', () => {
 
     // Check if error toast is shown
     await waitFor(() => {
-      expect(screen.getByText('Processing failed')).toBeInTheDocument();
+      expect(showToast).toHaveBeenCalledWith('Processing failed', 'error');
     });
   });
 });

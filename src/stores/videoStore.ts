@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import * as API from '../services/apis';
-import { useToastStore } from './toastStore';
+import { showToast } from '../components/Toast';
 
 interface TranscriptItem {
   time: number;
@@ -47,7 +47,7 @@ export const useVideoStore = create<VideoState>((set) => ({
   // Actions
   uploadVideo: async (file: File) => {
     if (!file || !file.type.startsWith('video/')) {
-      useToastStore.getState().showToast('Please select a video file', 'error');
+      showToast('Please select a video file', 'error');
       return;
     }
 
@@ -78,7 +78,7 @@ export const useVideoStore = create<VideoState>((set) => ({
       }
     } catch (error) {
       console.error('Video processing error:', error);
-      useToastStore.getState().showToast('Processing failed', 'error');
+      showToast('Processing failed', 'error');
       set((state: VideoState) => ({
         ...state,
         isProcessing: false,

@@ -15,7 +15,7 @@ export function VideoCaption() {
   }
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 p-4 bg-black/50 text-white text-center text-lg">
+    <div className="absolute bottom-0 left-0 right-0 p-4 bg-secondary-900/80 text-secondary-50 text-center text-lg animate-fade-in">
       {currentItem.text}
     </div>
   );

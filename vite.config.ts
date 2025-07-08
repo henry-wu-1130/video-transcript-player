@@ -11,6 +11,9 @@ export default defineConfig({
     headers: {
       'Cache-Control': 'no-store',
     },
+    host: true, // 允许外部访问
+    strictPort: true, // 如果端口被占用就报错，而不是尝试下一个端口
+    port: 5173, // 明确指定端口
   },
   build: {
     rollupOptions: {
@@ -43,15 +46,15 @@ export default defineConfig({
         '**/src/setupTests.ts',
         '**/src/vite-env.d.ts',
         '**/src/services/**',
-        '**/*.d.ts'
+        '**/*.d.ts',
       ],
       thresholds: {
         branches: 70,
         functions: 70,
         lines: 70,
-        statements: 70
+        statements: 70,
       },
-      reportOnFailure: false
+      reportOnFailure: false,
     },
     // 排除不需要測試的文件
     exclude: [
@@ -59,7 +62,7 @@ export default defineConfig({
       '**/dist/**',
       '**/cypress/**',
       '**/.{idea,git,cache,output,temp}/**',
-      '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress}.config.*'
-    ]
-  }
+      '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress}.config.*',
+    ],
+  },
 });

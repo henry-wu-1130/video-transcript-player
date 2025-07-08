@@ -39,6 +39,8 @@ export function Timeline({ duration }: TimelineProps) {
     setCurrentTime(newTime);
   };
 
+
+
   return (
     <div className="bg-gray-900">
       {/* Timeline container */}
@@ -64,7 +66,7 @@ export function Timeline({ duration }: TimelineProps) {
         {/* Current time indicator */}
         <div
           data-testid="current-time-indicator"
-          className="absolute top-0 bottom-0 w-1 bg-red-500"
+          className="absolute top-0 bottom-0 w-1 bg-red-500 cursor-grab active:cursor-grabbing hover:w-2 transition-all"
           style={{
             left: `${timeToPercent(currentTime)}%`,
             transform: 'translateX(-50%)',

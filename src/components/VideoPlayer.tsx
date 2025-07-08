@@ -21,13 +21,24 @@ export function VideoPlayer({
   onTimeUpdate,
   onDurationChange,
 }: VideoPlayerProps) {
-  // Sync video current time with prop
+  const handlePlayPause = () => {
+    if (!videoRef.current) {
+      return;
+    }
+
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+    } else {
+      videoRef.current.pause();
+    }
+  };
+
   useEffect(() => {
-    if (
-      videoRef.current &&
-      Math.abs(videoRef.current.currentTime - currentTime) > 0.5
-    ) {
-      videoRef.current.currentTime = currentTime;
+    const video = videoRef.current;
+    if (video) {
+      if (Math.abs(video.currentTime - currentTime) > 0.5) {
+        video.currentTime = currentTime;
+      }
     }
   }, [currentTime, videoRef]);
 
@@ -44,17 +55,23 @@ export function VideoPlayer({
         </div>
       ) : (
         <div className="flex-1 flex flex-col bg-secondary-950">
-          <div className="flex-1 flex items-center justify-center relative">
+          <div
+            className="flex-1 flex items-center justify-center relative cursor-pointer"
+            onClick={handlePlayPause}
+            data-testid="video-container"
+          >
             <video
               ref={videoRef}
               src={videoUrl}
-              className="max-h-full max-w-full"
+              className="max-h-full max-w-full w-full lg:w-auto"
               onTimeUpdate={onTimeUpdate}
               onLoadedMetadata={onDurationChange}
+              controls={false}
+              playsInline
             />
             <VideoCaption />
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 p-2 sm:p-4">
             {duration > 0 && (
               <>
                 <VideoControls videoRef={videoRef} duration={duration} />

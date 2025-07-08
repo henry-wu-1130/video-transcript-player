@@ -34,14 +34,6 @@ export function VideoControls({ videoRef, duration }: VideoControlsProps) {
       const firstItemTime = section.items[0].time;
       const nextSectionFirstTime = sections[i + 1]?.items[0].time ?? Infinity;
 
-      // console.log(`Checking section ${i}:`, {
-      //   sectionTitle: section.title,
-      //   firstItemTime,
-      //   nextSectionFirstTime,
-      //   isInThisSection:
-      //     currentTime >= firstItemTime && currentTime < nextSectionFirstTime,
-      // });
-
       if (currentTime >= firstItemTime && currentTime < nextSectionFirstTime) {
         return i;
       }

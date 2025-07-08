@@ -22,11 +22,11 @@ export function TranscriptSection({
   onToggleSelection,
 }: TranscriptSectionProps) {
   return (
-    <div className="mb-6" data-section-id={section.id}>
-      <h3 className="text-secondary-900 text-base font-medium mb-3">
+    <div className="mb-6 sm:mb-8" data-section-id={section.id}>
+      <h3 className="text-secondary-900 text-base sm:text-lg font-medium mb-3 sm:mb-4">
         {section.title}
       </h3>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 sm:gap-2">
         {section.items.map((item, index) => {
           const isCurrentTime = index === currentItemIndex;
 
@@ -36,7 +36,7 @@ export function TranscriptSection({
               data-testid="transcript-item"
               data-item-index={index}
               data-current={isCurrentTime ? 'true' : 'false'}
-              className={`flex gap-3 p-2 rounded transition-colors cursor-pointer border-2
+              className={`flex gap-3 p-2 sm:p-3 rounded transition-colors cursor-pointer border-2
                 ${
                   item.isHighlight
                     ? 'bg-primary-600 text-secondary-50'
@@ -47,8 +47,10 @@ export function TranscriptSection({
             >
               <button
                 data-testid="timestamp"
-                className={`font-mono text-sm shrink-0 hover:opacity-80 transition-opacity
-                  ${item.isHighlight ? 'text-secondary-50' : 'text-primary-600'}`}
+                className={`font-mono text-sm sm:text-base shrink-0 hover:opacity-80 transition-opacity
+                  ${
+                    item.isHighlight ? 'text-secondary-50' : 'text-primary-600'
+                  }`}
                 onClick={(e) => {
                   e.stopPropagation();
                   onTimeClick(item.time);
@@ -57,7 +59,9 @@ export function TranscriptSection({
                 {formatTime(item.time)}
               </button>
               <span
-                className={item.isHighlight ? 'text-secondary-50' : 'text-secondary-700'}
+                className={`${
+                  item.isHighlight ? 'text-secondary-50' : 'text-secondary-700'
+                } text-sm sm:text-base`}
               >
                 {item.text}
               </span>

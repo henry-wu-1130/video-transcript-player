@@ -30,7 +30,6 @@ interface VideoState {
   sections: TranscriptSection[];
   highlights: Highlight[];
   uploadVideo: (file: File) => Promise<void>;
-  clearVideo: () => void;
   setCurrentTime: (time: number) => void;
   toggleSelection: (sectionId: string, itemIndex: number) => void;
 }
@@ -90,16 +89,6 @@ export const useVideoStore = create<VideoState>((set) => ({
       }));
     }
   },
-  clearVideo: () =>
-    set((state: VideoState) => ({
-      ...state,
-      selectedVideo: null,
-      videoUrl: null,
-      fullTranscript: null,
-      sections: [],
-      highlights: [],
-    })),
-
   setCurrentTime: (time: number) =>
     set((state: VideoState) => ({
       ...state,

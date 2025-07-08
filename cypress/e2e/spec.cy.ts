@@ -1,6 +1,6 @@
 describe('Video Transcript Player', () => {
   it('loads the application', () => {
-    cy.visit('/')
-    cy.contains('上傳影片').should('be.visible')
-  })
-})
+    cy.visit('http://localhost:5173/');
+    cy.contains('Video Transcript Player').should('be.visible');
+  });
+});

@@ -25,3 +25,8 @@ dist-ssr
 
 # Test coverage
 coverage
+
+# Cypress
+cypress/screenshots/
+cypress/downloads/
+cypress/videos/

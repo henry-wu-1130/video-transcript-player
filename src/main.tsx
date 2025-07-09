@@ -6,7 +6,7 @@ import '../index.css';
 // MSW mock API
 async function initMocks() {
   const { worker } = await import('./mocks/browser');
-  await worker.start({ onUnhandledRequest: 'bypass' });
+  await worker.start();
 }
 
 // init MSW

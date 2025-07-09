@@ -1,6 +1,5 @@
 import { Toaster, toast } from 'react-hot-toast';
 
-// 將 toast 函數暴露出去，方便其他組件使用
 export const showToast = (message: string, type: 'success' | 'error') => {
   const toastOptions = {
     duration: 3000,
@@ -14,7 +13,6 @@ export const showToast = (message: string, type: 'success' | 'error') => {
   }
 };
 
-// Toast 組件現在只負責渲染 Toaster
 export const Toast = () => {
   return (
     <Toaster

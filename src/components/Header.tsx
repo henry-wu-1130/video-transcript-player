@@ -4,7 +4,7 @@ import { showToast } from './Toast';
 
 export function Header() {
   const { uploadVideo, videoUrl, isProcessing } = useVideoStore();
-  // 使用新的 showToast 函數
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleVideoUpload = async (
@@ -24,7 +24,6 @@ export function Header() {
   };
 
   useEffect(() => {
-    // 清理 URL 對象
     return () => {
       if (videoUrl) {
         URL.revokeObjectURL(videoUrl);

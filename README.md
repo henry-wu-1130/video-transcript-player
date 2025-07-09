@@ -1,6 +1,5 @@
 # Video Transcript Player 影片字幕播放器
 
-[![Coverage](https://coveralls.io/repos/github/wuhenli/video-transcript-player/badge.svg?branch=main)](https://coveralls.io/github/wuhenli/video-transcript-player?branch=main)
 [![React](https://img.shields.io/badge/React-18.2.0-61dafb.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0.0-blue.svg)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-4.1.11-38bdf8.svg)](https://tailwindcss.com/)

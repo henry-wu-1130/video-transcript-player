@@ -66,7 +66,6 @@ export const useVideoStore = create<VideoState>((set) => ({
       if (response.data.success) {
         const { videoUrl, fullTranscript, sections, highlights } =
           response.data.data;
-        console.log('Video processing completed:', response.data.data);
 
         set((state: VideoState) => ({
           ...state,

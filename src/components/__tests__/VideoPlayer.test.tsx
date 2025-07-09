@@ -30,7 +30,7 @@ class MockVideoElement extends HTMLVideoElement {
   }
 }
 
-window.HTMLVideoElement = MockVideoElement as any;
+window.HTMLVideoElement = MockVideoElement;
 
 describe('VideoPlayer', () => {
   beforeEach(() => {

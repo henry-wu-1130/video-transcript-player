@@ -1,3 +1,5 @@
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { http, HttpResponse } from 'msw';
 import {
   describe,
   it,
@@ -8,14 +10,11 @@ import {
   afterEach,
   afterAll,
 } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
+import { server } from '../../mocks/test';
+import { useVideoStore } from '../../stores/videoStore';
 import { Header } from '../Header';
 import { Toast, showToast } from '../Toast';
-import { useVideoStore } from '../../stores/videoStore';
-
-import { http, HttpResponse } from 'msw';
-import { server } from '../../mocks/test';
 
 // Mock showToast
 vi.mock('../Toast', () => ({
@@ -69,7 +68,7 @@ describe('Header Component', () => {
   it('should handle video upload and API processing', async () => {
     // Mock API response
     server.use(
-      http.post('/api/video/process', () => {
+      http.post('/api/video/process', async () => {
         return HttpResponse.json({
           success: true,
           data: {
@@ -119,11 +118,7 @@ describe('Header Component', () => {
 
   it('should handle API error', async () => {
     // Mock API error response
-    server.use(
-      http.post('/api/video/process', () => {
-        return HttpResponse.error();
-      })
-    );
+    server.use(http.post('/api/video/process', () => HttpResponse.error()));
 
     render(
       <TestWrapper>

@@ -39,8 +39,6 @@ export function Timeline({ duration }: TimelineProps) {
     setCurrentTime(newTime);
   };
 
-
-
   return (
     <div className="bg-gray-900">
       {/* Timeline container */}

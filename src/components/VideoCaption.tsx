@@ -1,4 +1,4 @@
-import { useTranscriptItemMap } from '../hooks/useTranscript';
+import { useTranscriptItemMap } from '../hooks/useTranscriptItemMap';
 import { useVideoStore } from '../stores/videoStore';
 import Draggable from 'react-draggable';
 import { useEffect, useRef, useState } from 'react';
@@ -7,7 +7,12 @@ export function VideoCaption() {
   const { sections, currentTime } = useVideoStore();
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [bounds, setBounds] = useState({ left: 0, top: 0, right: 0, bottom: 0 });
+  const [bounds, setBounds] = useState({
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+  });
 
   useEffect(() => {
     const updateBounds = () => {
@@ -18,7 +23,7 @@ export function VideoCaption() {
           left: -rect.width / 2,
           top: 0,
           right: rect.width / 2,
-          bottom: rect.height - 60 // 保留一些空間給控制項
+          bottom: rect.height - 60, // 保留一些空間給控制項
         });
       }
     };
@@ -39,7 +44,10 @@ export function VideoCaption() {
   }
 
   return (
-    <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div
+      ref={containerRef}
+      className="absolute inset-0 overflow-hidden pointer-events-none"
+    >
       <Draggable
         position={position}
         onDrag={(_, data) => setPosition({ x: data.x, y: data.y })}

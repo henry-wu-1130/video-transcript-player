@@ -15,7 +15,7 @@ export default {
           700: 'var(--warning-700)',
           800: 'var(--warning-800)',
           900: 'var(--warning-900)',
-          950: 'var(--warning-950)',
+          950: 'var(--warning-950)'
         },
         primary: {
           50: 'var(--primary-50)',
@@ -28,7 +28,7 @@ export default {
           700: 'var(--primary-700)',
           800: 'var(--primary-800)',
           900: 'var(--primary-900)',
-          950: 'var(--primary-950)',
+          950: 'var(--primary-950)'
         },
         secondary: {
           50: 'var(--secondary-50)',
@@ -41,10 +41,10 @@ export default {
           700: 'var(--secondary-700)',
           800: 'var(--secondary-800)',
           900: 'var(--secondary-900)',
-          950: 'var(--secondary-950)',
-        },
-      },
-    },
+          950: 'var(--secondary-950)'
+        }
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 };

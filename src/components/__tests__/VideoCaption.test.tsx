@@ -22,7 +22,7 @@ describe('VideoCaption', () => {
   ];
 
   beforeEach(() => {
-    (useVideoStore as any).mockReturnValue({
+    vi.mocked(useVideoStore).mockReturnValue({
       sections: mockSections,
       currentTime: 5,
     });
@@ -34,7 +34,7 @@ describe('VideoCaption', () => {
   });
 
   it('renders nothing when no current caption', () => {
-    (useVideoStore as any).mockReturnValue({
+    vi.mocked(useVideoStore).mockReturnValue({
       sections: mockSections,
       currentTime: 20, // Time after all captions
     });
@@ -44,7 +44,7 @@ describe('VideoCaption', () => {
   });
 
   it('renders nothing when no sections available', () => {
-    (useVideoStore as any).mockReturnValue({
+    vi.mocked(useVideoStore).mockReturnValue({
       sections: [],
       currentTime: 0,
     });

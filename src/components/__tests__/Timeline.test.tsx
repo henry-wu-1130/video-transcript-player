@@ -32,7 +32,7 @@ describe('Timeline', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useVideoStore).mockReturnValue(mockStore as any);
+    vi.mocked(useVideoStore).mockReturnValue(mockStore);
   });
 
   it('should render timeline with correct duration', () => {

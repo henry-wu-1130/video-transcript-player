@@ -8,7 +8,11 @@ export const mockTranscriptSections: TranscriptSection[] = [
     items: [
       { time: 0, text: '大家好，歡迎來到這個影片', isHighlight: false },
       { time: 5, text: '今天我們要討論一個重要的主題', isHighlight: true },
-      { time: 10, text: '這個主題與我們的日常生活息息相關', isHighlight: false },
+      {
+        time: 10,
+        text: '這個主題與我們的日常生活息息相關',
+        isHighlight: false,
+      },
     ],
   },
   {

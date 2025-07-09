@@ -22,7 +22,6 @@ export function Transcript({
   onTimeClick,
   onToggleSelection,
 }: TranscriptProps) {
-
   if (isProcessing) {
     return <Loading />;
   }

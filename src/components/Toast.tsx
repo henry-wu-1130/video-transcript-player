@@ -4,11 +4,9 @@ import { Toaster, toast } from 'react-hot-toast';
 export const showToast = (message: string, type: 'success' | 'error') => {
   const toastOptions = {
     duration: 3000,
-    className: `text-secondary-50 ${
-      type === 'error' ? 'bg-error-500' : 'bg-success-500'
-    }`,
+    className: `text-secondary-50 ${type === 'error' ? 'bg-error-500' : 'bg-success-500'}`,
   };
-  
+
   if (type === 'error') {
     toast.error(message, toastOptions);
   } else {

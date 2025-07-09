@@ -3,9 +3,7 @@ import { type TranscriptSection as ITranscriptSection } from '../stores/videoSto
 function formatTime(seconds: number): string {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = Math.floor(seconds % 60);
-  return `${minutes.toString().padStart(2, '0')}:${remainingSeconds
-    .toString()
-    .padStart(2, '0')}`;
+  return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
 }
 
 interface TranscriptSectionProps {
@@ -37,20 +35,14 @@ export function TranscriptSection({
               data-item-index={index}
               data-current={isCurrentTime ? 'true' : 'false'}
               className={`flex gap-3 p-2 sm:p-3 rounded transition-colors cursor-pointer border-2
-                ${
-                  item.isHighlight
-                    ? 'bg-primary-600 text-secondary-50'
-                    : 'hover:bg-secondary-100'
-                }
+                ${item.isHighlight ? 'bg-primary-600 text-secondary-50' : 'hover:bg-secondary-100'}
                 ${isCurrentTime ? 'border-warning-400' : 'border-transparent'}`}
               onClick={() => onToggleSelection(index)}
             >
               <button
                 data-testid="timestamp"
                 className={`font-mono text-sm sm:text-base shrink-0 hover:opacity-80 transition-opacity
-                  ${
-                    item.isHighlight ? 'text-secondary-50' : 'text-primary-600'
-                  }`}
+                  ${item.isHighlight ? 'text-secondary-50' : 'text-primary-600'}`}
                 onClick={(e) => {
                   e.stopPropagation();
                   onTimeClick(item.time);

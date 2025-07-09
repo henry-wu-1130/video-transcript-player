@@ -32,6 +32,23 @@ Video Transcript Player 是一個現代化的影片播放應用程式，專注�
 - GitHub Actions
 - Vitest & Cypress
 
+---
+
+## 技術選型與架構設計說明
+
+- 專案骨幹以 Windsurf 完成，先設置安裝最基礎的程式架構。
+- 前端技術選用 React，狀態管理採用輕量化的 zustand。
+- 開發環境採用 Vite HMR，樣式以 utility class first 的 Tailwind CSS。
+- 以功能為切分，模擬 Scrum 流程，逐步完成每個功能。
+- 依據需求急迫性與時限，決定先開發還是先撰寫測試（理想情況下優先撰寫測試），測試區分為整合測試與 Cypress 點對點測試。
+- 測試用例設計考慮結合專案管理與團隊測試需求，盡可能將測試規格化，減少團隊溝通成本。
+- 特殊邏輯集中於 hooks，API mock 採用 MSW，支援瀏覽器與測試環境。
+- CI/CD 流程針對不同分支做不同處理。
+- 建議前端成員設置 .vscode 或 .prettierrc 統一程式碼風格，避免不同環境造成設置不一致。
+- 若公司產品眾多且設計風格一致，建議可考慮採用 Storybook 作為元件文檔工具。
+
+---
+
 ## 專案結構
 
 ```

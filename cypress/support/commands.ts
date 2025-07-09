@@ -27,42 +27,28 @@
 //
 import '@testing-library/cypress';
 
-declare global {
-  namespace Cypress {
-    interface Chainable<Subject = any> {
-      /**
-       * 等待视频加载完成
-       */
-      waitForVideoLoad(): Chainable<JQuery<HTMLVideoElement>>
-      /**
-       * 设置视频当前时间
-       */
-      setVideoTime(time: number): Chainable<JQuery<HTMLVideoElement>>
-      /**
-       * 检查视频是否在播放
-       */
-      isVideoPlaying(): Chainable<boolean>
-    }
-  }
-}
+export {};
 
 Cypress.Commands.add('waitForVideoLoad', () => {
-  return cy.get('video').should('exist').then<JQuery<HTMLVideoElement>>($video => {
-    return new Cypress.Promise(resolve => {
-      const video = $video[0];
-      if (video.readyState >= 4) {
-        resolve($video);
-      } else {
-        video.addEventListener('canplay', () => {
+  return cy
+    .get('video')
+    .should('exist')
+    .then<JQuery<HTMLVideoElement>>(($video) => {
+      return new Cypress.Promise((resolve) => {
+        const video = $video[0];
+        if (video.readyState >= 4) {
           resolve($video);
-        });
-      }
+        } else {
+          video.addEventListener('canplay', () => {
+            resolve($video);
+          });
+        }
+      });
     });
-  });
 });
 
 Cypress.Commands.add('setVideoTime', (time: number) => {
-  return cy.get('video').then<JQuery<HTMLVideoElement>>($video => {
+  return cy.get('video').then<JQuery<HTMLVideoElement>>(($video) => {
     const video = $video[0];
     video.currentTime = time;
     return $video;
@@ -70,7 +56,7 @@ Cypress.Commands.add('setVideoTime', (time: number) => {
 });
 
 Cypress.Commands.add('isVideoPlaying', () => {
-  return cy.get('video').then<boolean>($video => {
+  return cy.get('video').then<boolean>(($video) => {
     const video = $video[0] as HTMLVideoElement;
     return !video.paused;
   });

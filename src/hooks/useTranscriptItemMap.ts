@@ -28,7 +28,10 @@ export function useTranscriptItemMap(
       .sort((a, b) => a.time - b.time);
 
     // If time is after the last item, return null
-    if (allItems.length > 0 && currentTime > allItems[allItems.length - 1].time) {
+    if (
+      allItems.length > 0 &&
+      currentTime > allItems[allItems.length - 1].time
+    ) {
       return {
         currentSectionIndex: -1,
         currentItemIndex: -1,

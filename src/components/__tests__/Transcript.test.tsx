@@ -33,7 +33,7 @@ describe('TranscriptContainer', () => {
 
   beforeEach(() => {
     // Setup mock store
-    (useVideoStore as any).mockReturnValue({
+    vi.mocked(useVideoStore).mockReturnValue({
       sections: mockSections,
       currentTime: 5,
       setCurrentTime: mockSetCurrentTime,
@@ -71,7 +71,7 @@ describe('TranscriptContainer', () => {
     cleanup();
 
     // Set current time to second section's first item
-    (useVideoStore as any).mockReturnValue({
+    vi.mocked(useVideoStore).mockReturnValue({
       sections: mockSections,
       currentTime: 20,
       setCurrentTime: mockSetCurrentTime,
@@ -88,7 +88,7 @@ describe('TranscriptContainer', () => {
     expect(mockSetCurrentTime).toHaveBeenCalledWith(30);
 
     // Update store to simulate video seeking to that time
-    (useVideoStore as any).mockReturnValue({
+    vi.mocked(useVideoStore).mockReturnValue({
       sections: mockSections,
       currentTime: 30,
       setCurrentTime: mockSetCurrentTime,
@@ -173,7 +173,7 @@ describe('TranscriptContainer', () => {
     });
 
     // Set initial current time
-    (useVideoStore as any).mockReturnValue({
+    vi.mocked(useVideoStore).mockReturnValue({
       sections: mockSections,
       currentTime: 0,
       setCurrentTime: mockSetCurrentTime,
@@ -183,7 +183,7 @@ describe('TranscriptContainer', () => {
     const { rerender } = render(<TranscriptContainer />);
 
     // Update current time to trigger auto-scroll
-    (useVideoStore as any).mockReturnValue({
+    vi.mocked(useVideoStore).mockReturnValue({
       sections: mockSections,
       currentTime: 30,
       setCurrentTime: mockSetCurrentTime,

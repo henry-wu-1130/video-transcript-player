@@ -1,6 +1,6 @@
-import { setupServer } from 'msw/node'
-import { handlers } from './handlers'
-import { vi } from 'vitest'
+import { setupServer } from 'msw/node';
+import { handlers } from './handlers';
+import { vi } from 'vitest';
 
 // Mock matchMedia for react-hot-toast
 Object.defineProperty(window, 'matchMedia', {
@@ -17,4 +17,4 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
-export const server = setupServer(...handlers)
+export const server = setupServer(...handlers);

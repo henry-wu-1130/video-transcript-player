@@ -3,6 +3,15 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { VideoPlayerContainer } from '../VideoPlayerContainer';
 import { useVideoStore } from '../../stores/videoStore';
 
+interface VideoPlayerProps {
+  videoRef: React.MutableRefObject<HTMLVideoElement>;
+  videoUrl: string | null;
+  currentTime: number;
+  duration: number;
+  onTimeUpdate: () => void;
+  onDurationChange: () => void;
+}
+
 // Mock VideoPlayer component
 vi.mock('../../components/VideoPlayer', () => ({
   VideoPlayer: ({
@@ -12,39 +21,36 @@ vi.mock('../../components/VideoPlayer', () => ({
     duration,
     onTimeUpdate,
     onDurationChange,
-  }: any) => (
-    // 模擬組件渲染
+  }: VideoPlayerProps) => (
     <div data-testid="video-player-container">
       <div data-testid="video-url">URL: {videoUrl}</div>
       <div data-testid="video-time">Time: {currentTime}</div>
       <div data-testid="video-duration">Duration: {duration}</div>
-      <button 
-        data-testid="update-time-btn" 
+      <button
+        data-testid="update-time-btn"
         onClick={() => {
           // 模擬 video 元素
           const mockVideo = { currentTime: 45 };
           Object.defineProperty(mockVideo, 'currentTime', {
             get: () => 45,
-            configurable: true
+            configurable: true,
           });
-          // 設置到 videoRef.current
-          (videoRef as any).current = mockVideo;
+          videoRef.current = mockVideo as HTMLVideoElement;
           onTimeUpdate();
         }}
       >
         Update Time
       </button>
-      <button 
-        data-testid="update-duration-btn" 
+      <button
+        data-testid="update-duration-btn"
         onClick={() => {
           // 模擬 video 元素
           const mockVideo = { duration: 90 };
           Object.defineProperty(mockVideo, 'duration', {
             get: () => 90,
-            configurable: true
+            configurable: true,
           });
-          // 設置到 videoRef.current
-          (videoRef as any).current = mockVideo;
+          videoRef.current = mockVideo as HTMLVideoElement;
           onDurationChange();
         }}
       >
@@ -67,16 +73,16 @@ describe('VideoPlayerContainer', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useVideoStore).mockReturnValue(mockStore as any);
+    vi.mocked(useVideoStore).mockReturnValue(mockStore);
   });
 
   it('should render VideoPlayer with correct props', () => {
     render(<VideoPlayerContainer />);
-    
+
     const player = screen.getByTestId('video-player-container');
     const urlElement = screen.getByTestId('video-url');
     const timeElement = screen.getByTestId('video-time');
-    
+
     expect(player).toBeInTheDocument();
     expect(urlElement).toHaveTextContent('URL: test-video.mp4');
     expect(timeElement).toHaveTextContent('Time: 30');
@@ -84,19 +90,19 @@ describe('VideoPlayerContainer', () => {
 
   it('should update current time when video time changes', () => {
     render(<VideoPlayerContainer />);
-    
+
     const updateButton = screen.getByTestId('update-time-btn');
     fireEvent.click(updateButton);
-    
+
     expect(mockSetCurrentTime).toHaveBeenCalled();
   });
 
   it('should handle duration change', () => {
     render(<VideoPlayerContainer />);
-    
+
     const durationButton = screen.getByTestId('update-duration-btn');
     fireEvent.click(durationButton);
-    
+
     expect(screen.getByTestId('video-duration')).toBeInTheDocument();
   });
 
@@ -104,7 +110,7 @@ describe('VideoPlayerContainer', () => {
     vi.mocked(useVideoStore).mockReturnValue({
       ...mockStore,
       videoUrl: null,
-    } as any);
+    });
 
     render(<VideoPlayerContainer />);
     expect(screen.getByText('Upload a video to preview')).toBeInTheDocument();

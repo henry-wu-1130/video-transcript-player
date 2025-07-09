@@ -3,25 +3,13 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import '../index.css';
 
-// MSW 模擬 API
+// MSW mock API
 async function initMocks() {
-  if (process.env.NODE_ENV === 'development') {
-    const { worker } = await import('./mocks/browser');
-    // 確保 service worker 可以讀取到正確的 MIME type
-    return worker.start({
-      serviceWorker: {
-        url: '/mockServiceWorker.js',
-        options: {
-          scope: '/',
-        },
-      },
-      onUnhandledRequest: 'bypass',
-    });
-  }
-  return Promise.resolve();
+  const { worker } = await import('./mocks/browser');
+  await worker.start({ onUnhandledRequest: 'bypass' });
 }
 
-// 初始化 MSW
+// init MSW
 initMocks().then(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>

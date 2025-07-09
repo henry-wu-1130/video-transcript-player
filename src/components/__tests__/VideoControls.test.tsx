@@ -12,7 +12,7 @@ const mockVideoRef = {
     pause: vi.fn(),
     currentTime: 30,
   },
-} as any;
+} as unknown as React.MutableRefObject<HTMLVideoElement>;
 
 // Mock store
 vi.mock('../../stores/videoStore');
@@ -33,14 +33,14 @@ describe('VideoControls', () => {
       play: vi.fn(),
       pause: vi.fn(),
       currentTime: 30,
-    };
+    } as unknown as HTMLVideoElement;
     // Reset store state
-    vi.mocked(useVideoStore).mockReturnValue({ ...defaultStore } as any);
+    vi.mocked(useVideoStore).mockReturnValue({ ...defaultStore });
   });
 
   it('should render time display correctly', () => {
     const store = { ...defaultStore };
-    vi.mocked(useVideoStore).mockReturnValue(store as any);
+    vi.mocked(useVideoStore).mockReturnValue(store);
 
     render(<VideoControls videoRef={mockVideoRef} duration={90} />);
     expect(screen.getByText('00:30 / 01:30')).toBeInTheDocument();
@@ -48,7 +48,7 @@ describe('VideoControls', () => {
 
   it('should handle play/pause button click', () => {
     const store = { ...defaultStore };
-    vi.mocked(useVideoStore).mockReturnValue(store as any);
+    vi.mocked(useVideoStore).mockReturnValue(store);
 
     render(<VideoControls videoRef={mockVideoRef} duration={90} />);
     const playButton = screen.getByRole('button', { name: /play/i });
@@ -56,7 +56,10 @@ describe('VideoControls', () => {
     fireEvent.click(playButton);
     expect(mockVideoRef.current.play).toHaveBeenCalled();
 
-    mockVideoRef.current.paused = false;
+    Object.defineProperty(mockVideoRef.current, 'paused', {
+      configurable: true,
+      get: () => false,
+    });
     fireEvent.click(playButton);
     expect(mockVideoRef.current.pause).toHaveBeenCalled();
   });
@@ -84,7 +87,7 @@ describe('VideoControls', () => {
       ],
       setCurrentTime: mockSetCurrentTime,
     };
-    vi.mocked(useVideoStore).mockReturnValue(store as any);
+    vi.mocked(useVideoStore).mockReturnValue(store);
 
     render(<VideoControls videoRef={mockVideoRef} duration={90} />);
     const prevButton = screen.getByRole('button', {
@@ -97,7 +100,7 @@ describe('VideoControls', () => {
 
   it('should navigate to next section', () => {
     const store = { ...defaultStore };
-    vi.mocked(useVideoStore).mockReturnValue(store as any);
+    vi.mocked(useVideoStore).mockReturnValue(store);
 
     render(<VideoControls videoRef={mockVideoRef} duration={90} />);
     const nextButton = screen.getByRole('button', { name: /next section/i });
@@ -118,7 +121,7 @@ describe('VideoControls', () => {
       ],
       setCurrentTime: mockSetCurrentTime,
     };
-    vi.mocked(useVideoStore).mockReturnValue(firstSectionStore as any);
+    vi.mocked(useVideoStore).mockReturnValue(firstSectionStore);
 
     render(<VideoControls videoRef={mockVideoRef} duration={90} />);
     const prevButton = screen.getByRole('button', {
@@ -139,7 +142,7 @@ describe('VideoControls', () => {
       ],
       setCurrentTime: mockSetCurrentTime,
     };
-    vi.mocked(useVideoStore).mockReturnValue(lastSectionStore as any);
+    vi.mocked(useVideoStore).mockReturnValue(lastSectionStore);
 
     render(<VideoControls videoRef={mockVideoRef} duration={90} />);
     const nextButton = screen.getByRole('button', { name: /next section/i });

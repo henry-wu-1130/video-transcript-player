@@ -29,10 +29,5 @@ export const processVideo = async (
 ): Promise<AxiosResponse<VideoProcessResponse>> => {
   const formData = new FormData();
   formData.append('video', file);
-
-  return http.post<VideoProcessResponse>('/api/video/process', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+  return http.post<VideoProcessResponse>('/api/video/process', formData);
 };

@@ -1,7 +1,14 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+  "extends": "./tsconfig.app.json",
+  "include": [
+    "src",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "tailwind.config.js",
+    "setupTests.ts",
+    "src/mocks/**/*.ts",
+    "src/services/**/*.ts",
+    "src/stores/**/*.ts",
+    "src/test/**/*.ts"
   ]
 }

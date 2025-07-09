@@ -71,6 +71,8 @@ describe('Video Player', () => {
     cy.get('[data-testid="video-container"]').click();
 
     // 检查当前高亮的字幕项
-    cy.get('[data-testid="transcript-item"][data-current="true"]').should('exist');
+    cy.get('[data-testid="transcript-item"][data-current="true"]').should(
+      'exist'
+    );
   });
 });

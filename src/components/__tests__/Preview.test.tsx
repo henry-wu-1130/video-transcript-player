@@ -13,7 +13,7 @@ describe('Preview', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useVideoStore).mockReturnValue(mockStore as any);
+    vi.mocked(useVideoStore).mockReturnValue(mockStore);
   });
 
   it('should show upload message when no video', () => {
@@ -25,7 +25,7 @@ describe('Preview', () => {
     vi.mocked(useVideoStore).mockReturnValue({
       ...mockStore,
       isProcessing: true,
-    } as any);
+    });
     render(<Preview />);
     expect(screen.getByTestId('loading')).toBeInTheDocument();
   });
@@ -35,7 +35,7 @@ describe('Preview', () => {
     vi.mocked(useVideoStore).mockReturnValue({
       ...mockStore,
       videoUrl,
-    } as any);
+    });
     render(<Preview />);
     const video = screen.getByTestId('video-player');
     expect(video).toBeInTheDocument();

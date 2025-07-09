@@ -1,17 +1,17 @@
-import { beforeAll, afterEach, afterAll } from 'vitest'
-import { server } from './mocks/test'
+import { beforeAll, afterEach, afterAll } from 'vitest';
+import { server } from './src/mocks/test';
 
 beforeAll(() => {
   // 啟動 MSW 服務器
-  server.listen()
-})
+  server.listen();
+});
 
 afterEach(() => {
   // 每次測試後重置處理程序，這樣它們就不會影響其他測試
-  server.resetHandlers()
-})
+  server.resetHandlers();
+});
 
 afterAll(() => {
   // 清理
-  server.close()
-})
+  server.close();
+});

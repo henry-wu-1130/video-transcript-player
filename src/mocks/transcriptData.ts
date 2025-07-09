@@ -44,41 +44,6 @@ export const mockTranscriptSections: TranscriptSection[] = [
     items: [
       { time: 55, text: '現在讓我們深入討論一些實務技巧', isHighlight: false },
       { time: 60, text: '這些技巧可以幫助提升工作效率', isHighlight: true },
-      { time: 65, text: '我們會分享一些實用的小撇步', isHighlight: false },
-      { time: 70, text: '這些都是經過實踐證明有效的方法', isHighlight: true },
-    ],
-  },
-  {
-    id: 'part4',
-    title: '第四部分：常見問題',
-    summary: '解答常見問題和解決方案',
-    items: [
-      { time: 75, text: '接下來我們來討論一些常見的問題', isHighlight: false },
-      { time: 80, text: '這些問題在工作中經常遇到', isHighlight: true },
-      { time: 85, text: '我們會提供解決這些問題的方法', isHighlight: false },
-      { time: 90, text: '這些解決方案都是經過驗證的', isHighlight: true },
-    ],
-  },
-  {
-    id: 'part5',
-    title: '第五部分：最佳實踐',
-    summary: '分享最佳實踐和成功案例',
-    items: [
-      { time: 95, text: '讓我們來看看一些最佳實踐', isHighlight: false },
-      { time: 100, text: '這些實踐可以幫助避免常見錯誤', isHighlight: true },
-      { time: 105, text: '我們會分享一些成功的案例', isHighlight: false },
-      { time: 110, text: '這些案例都有很好的參考價值', isHighlight: true },
-    ],
-  },
-  {
-    id: 'conclusion',
-    title: '總結',
-    summary: '總結重點並結束影片',
-    items: [
-      { time: 115, text: '今天我們討論了很多重要的內容', isHighlight: false },
-      { time: 120, text: '希望這些內容對大家有幫助', isHighlight: true },
-      { time: 125, text: '如果有任何問題，歡迎在下方留言', isHighlight: false },
-      { time: 130, text: '謝謝大家的觀看，下次再見！', isHighlight: true },
     ],
   },
 ];

@@ -27,7 +27,8 @@ export const handlers = [
       {
         success: true,
         data: {
-          videoUrl: '../../cypress/fixtures/test.mp4', // TODO: replace with actual video URL
+          videoUrl:
+            'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4', // TODO: replace with actual video URL
           fullTranscript,
           sections: mockTranscriptSections,
           highlights,

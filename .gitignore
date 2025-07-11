@@ -30,3 +30,8 @@ coverage
 cypress/screenshots/
 cypress/downloads/
 cypress/videos/
+
+# Lighthouse
+.lighthouseci/
+lhci-report/
+badges/

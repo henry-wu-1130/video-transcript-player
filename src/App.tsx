@@ -1,8 +1,8 @@
 import { Layout } from './components/Layout';
 import { Header } from './components/Header';
+import { Toast } from './components/Toast';
 import { TranscriptContainer } from './containers/TranscriptContainer';
 import { VideoPlayerContainer } from './containers/VideoPlayerContainer';
-import { Toast } from './components/Toast';
 
 function App() {
   return (

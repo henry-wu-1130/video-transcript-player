@@ -18,7 +18,7 @@ jobs:
       - name: Start server
         run: npm run preview &
       - name: Wait for server
-        run: npx wait-on http://localhost:5173
+        run: npx wait-on http://localhost:4173
       - name: Run Lighthouse CI
         run: npx lhci autorun --config=./lighthouserc.json
       - name: Upload LHCI report artifact

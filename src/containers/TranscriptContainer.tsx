@@ -1,8 +1,6 @@
 import { useRef } from 'react';
-import {
-  useTranscriptItemMap,
-  useAutoScroll,
-} from '../hooks/useTranscriptItemMap';
+import { useAutoScroll } from '../hooks/useAutoScroll';
+import { useTranscriptItemMap } from '../hooks/useTranscriptItemMap';
 import { useVideoStore } from '../stores/videoStore';
 import { Transcript } from '../components/Transcript';
 

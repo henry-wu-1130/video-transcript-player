@@ -7,7 +7,7 @@ export default defineConfig({
     },
     experimentalWebKitSupport: true,
     chromeWebSecurity: false,
-    video: false, // 禁用视频录制以提高性能
+    video: false,
     viewportWidth: 1280,
     viewportHeight: 720,
   },

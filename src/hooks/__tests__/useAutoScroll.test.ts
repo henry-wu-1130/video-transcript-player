@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook } from '@testing-library/react';
-import { useAutoScroll } from '../useTranscriptItemMap';
+import { useAutoScroll } from '../useAutoScroll';
 
 describe('useAutoScroll', () => {
   const mockRef = { current: document.createElement('div') };

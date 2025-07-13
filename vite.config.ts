@@ -11,9 +11,9 @@ export default defineConfig({
     headers: {
       'Cache-Control': 'no-store',
     },
-    host: true, // 允許外部訪問
-    strictPort: true, // 如果端口被佔用就報錯，而不是嘗試下一個端口
-    port: 5173, // 需要明確指定端口
+    host: true, // 允許外部訪問，因為執行 Cypress 測試時需要
+    strictPort: true, // 如果 Port 被佔用就報錯，而不是嘗試下一個端口
+    port: 5173, // 明確指定端口
   },
   build: {
     rollupOptions: {

@@ -2,15 +2,10 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import '../index.css';
+import { initializeMSW } from './mocks/config';
 
-// MSW mock API
-async function initMocks() {
-  const { worker } = await import('./mocks/browser');
-  await worker.start();
-}
-
-// init MSW
-initMocks().then(() => {
+// Initialize app with conditional MSW
+initializeMSW().then(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <App />

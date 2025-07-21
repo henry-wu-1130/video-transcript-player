@@ -9,6 +9,11 @@ on:
 jobs:
   test-build:
     runs-on: ubuntu-latest
+    env:
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      SENTRY_RELEASE: ${{ github.sha }}
+      SENTRY_ORG: hen-li-wu
+      SENTRY_PROJECT: video-transcript-player
 
     steps:
       - uses: actions/checkout@v4
@@ -31,9 +36,9 @@ jobs:
 
       - name: Start local server for Lighthouse
         run: |
-          npm run start & npx wait-on http://localhost:3000
+          npm run preview & npx wait-on http://localhost:4173
 
       - name: Run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.13.x
-          lhci autorun --collect.url=http://localhost:3000
+          lhci autorun --collect.url=http://localhost:4173

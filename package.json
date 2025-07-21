@@ -16,6 +16,7 @@
     "test:e2e:dev": "cypress open"
   },
   "dependencies": {
+    "@sentry/react": "^9.40.0",
     "@tailwindcss/vite": "^4.1.11",
     "axios": "^1.10.0",
     "react": "^18.2.0",

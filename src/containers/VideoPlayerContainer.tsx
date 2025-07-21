@@ -1,6 +1,10 @@
-import { useRef, useState } from 'react';
+import { lazy, useRef, useState } from 'react';
 import { useVideoStore } from '../stores/videoStore';
-import { VideoPlayer } from '../components/VideoPlayer';
+const VideoPlayer = lazy(() =>
+  import('../components/VideoPlayer').then((module) => ({
+    default: module.VideoPlayer,
+  }))
+);
 
 export function VideoPlayerContainer() {
   const videoRef = useRef<HTMLVideoElement>(null);
